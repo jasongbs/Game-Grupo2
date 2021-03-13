@@ -1,0 +1,5 @@
+Durante a aula do dia 12/03.
+
+- Realizamos as instalações do GIT, e criamos clone nas três maquinas dos alunos.
+- Definições de ideias para construção do jogo.
+- Implementação em estágio bem inicial (Commit não realizado).
