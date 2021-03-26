@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class playersControler : MonoBehaviour
 {
-
     public float speedForce = 12.0f;
     public float jumpForce = 5.0f;
-
 
     public bool IsGrounded = true;
     public Vector3 offset = Vector2.zero;
@@ -20,17 +18,12 @@ public class playersControler : MonoBehaviour
     private Rigidbody2D _body = null;
     private SpriteRenderer _renderer = null;
 
-
-
-
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
         _body = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
     }
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +53,6 @@ public class playersControler : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         IsGrounded = Physics2D.OverlapCircle(this.transform.position + offset, raidios, layer);
 
         if (_moviment.sqrMagnitude > 0.1f)
@@ -74,7 +66,20 @@ public class playersControler : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere((this.transform.position + offset), raidios);
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        AiController aiController = collision.gameObject.GetComponent<AiController>();
+
+        if (aiController)
+        {
+            currentHitPoint -= aiController.damage;
+            Vector2 direction = collision.gameObject.transform.position.normalized;
+            direction.y = 0f;
+            m_body2d.velocity = Vector2.zero;
+            m_body2d.AddForce(direction * 150, ForceMode2D.Impulse);
+        }
     }
 
 
