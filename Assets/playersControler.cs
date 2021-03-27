@@ -11,12 +11,14 @@ public class playersControler : MonoBehaviour
     public Vector3 offset = Vector2.zero;
     public float raidios = 10.0f;
     public LayerMask layer;
+    public Vector2 bonecoPos;
 
     private Vector2 _input = Vector2.zero;
     private Vector2 _direction = Vector2.zero;
     public Vector2 _moviment = Vector2.zero;
     private Rigidbody2D _body = null;
     private SpriteRenderer _renderer = null;
+    
 
     // Awake is called when the script instance is being loaded
     private void Awake()
@@ -49,7 +51,13 @@ public class playersControler : MonoBehaviour
 
     }
 
-
+    
+    //fazer um delay na camera. 
+     /*private void LateUpdate()
+     {
+       transform.Translate(0, Time.deltaTime, 0);
+     }*/
+    
 
     private void FixedUpdate()
     {
@@ -62,12 +70,14 @@ public class playersControler : MonoBehaviour
         }
     }
 
+
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere((this.transform.position + offset), raidios);
     }
-
+    /*
     private void OnCollisionEnter2D(Collision2D collision)
     {
         AiController aiController = collision.gameObject.GetComponent<AiController>();
@@ -80,7 +90,7 @@ public class playersControler : MonoBehaviour
             m_body2d.velocity = Vector2.zero;
             m_body2d.AddForce(direction * 150, ForceMode2D.Impulse);
         }
-    }
+    }*/
 
 
 
