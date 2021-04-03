@@ -7,10 +7,8 @@ public class playersControler : MonoBehaviour
     public float speedForce = 12.0f;
     public float jumpForce = 5.0f;
 
-    public bool IsGrounded = true;
     public Vector3 offset = Vector2.zero;
     public float raidios = 10.0f;
-    public LayerMask layer;
     public Vector2 bonecoPos;
 
     private Vector2 _input = Vector2.zero;
@@ -18,6 +16,15 @@ public class playersControler : MonoBehaviour
     public Vector2 _moviment = Vector2.zero;
     private Rigidbody2D _body = null;
     private SpriteRenderer _renderer = null;
+
+    public bool taNoChao = true;
+    public bool taNaAgua;
+    public Transform detectaChao;
+    public Transform detectaAgua;
+    public LayerMask oQueEhChao;
+    public LayerMask oQueEhAgua;
+
+    public int pulosExtras = 1;
     
 
     // Awake is called when the script instance is being loaded
@@ -30,12 +37,14 @@ public class playersControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _body = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        taNoChao = Physics2D.OverlapCircle(detectaChao.position, 0.2f, oQueEhChao);
+        taNaAgua = Physics2D.OverlapCircle(detectaChao.position, 0.2f, oQueEhAgua);
 
         _moviment = new Vector2(Input.GetAxisRaw("Horizontal") * speedForce, 0.0f);
 
@@ -44,19 +53,33 @@ public class playersControler : MonoBehaviour
             _renderer.flipX = !(Input.GetAxis("Horizontal") > 0.0f);
         }
 
-        Debug.Log(IsGrounded);
-
-        if (Input.GetButtonDown("Jump") && IsGrounded)
+        if (Input.GetButtonDown("Jump") && taNoChao == true)
         {
-            _body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            _body.velocity = Vector2.up * jumpForce;
         }
 
+        if (Input.GetButtonDown("Jump") && taNoChao == false && pulosExtras > 0)
+        {
+            _body.velocity = Vector2.up * jumpForce;
+            pulosExtras--;
+        }
+        if (taNoChao)
+        {
+            pulosExtras = 1;
+        }
+
+        if (taNaAgua)
+        {
+            var posicao_inicial = new Vector3(-20.117f, -1.264f, 0);
+            _body.transform.position = posicao_inicial;
+            Debug.Log("Morreu");
+        }
     }
 
 
     private void FixedUpdate()
     {
-        IsGrounded = Physics2D.OverlapCircle(this.transform.position + offset, raidios, layer);
+        taNoChao = Physics2D.OverlapCircle(this.transform.position + offset, raidios, oQueEhChao);
 
         if (_moviment.sqrMagnitude > 0.1f)
         {
@@ -66,12 +89,12 @@ public class playersControler : MonoBehaviour
     }
 
 
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere((this.transform.position + offset), raidios);
     }
+
     /*
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -86,8 +109,4 @@ public class playersControler : MonoBehaviour
             m_body2d.AddForce(direction * 150, ForceMode2D.Impulse);
         }
     }*/
-
-
-
-
 }
