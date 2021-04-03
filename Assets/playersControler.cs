@@ -44,20 +44,15 @@ public class playersControler : MonoBehaviour
             _renderer.flipX = !(Input.GetAxis("Horizontal") > 0.0f);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        Debug.Log(IsGrounded);
+
+        if (Input.GetButtonDown("Jump") && IsGrounded)
         {
             _body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
     }
 
-    
-    //fazer um delay na camera. 
-     /*private void LateUpdate()
-     {
-       transform.Translate(0, Time.deltaTime, 0);
-     }*/
-    
 
     private void FixedUpdate()
     {

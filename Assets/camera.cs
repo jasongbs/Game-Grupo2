@@ -10,6 +10,14 @@ public class camera : MonoBehaviour
         
     }
 
+
+    //fazer um delay na camera. 
+    /*private void LateUpdate()
+    {
+      transform.Translate(0, Time.deltaTime, 0);
+    }*/
+
+
     // Update is called once per frame
     void Update()
     {
