@@ -13,4 +13,6 @@ public class pecaGiratoria : MonoBehaviour
         // Dampen towards the target rotation
         this.transform.eulerAngles = new Vector3(0, 0, smooth);
     }
+
+   
 }

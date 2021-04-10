@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class playersControler : MonoBehaviour
 {
-    public float speedForce = 12.0f;
-    public float jumpForce = 5.0f;
+    public float speedForce = 15.0f;
+    public float jumpForce = 8.0f;
 
     public Vector3 offset = Vector2.zero;
     public float raidios = 10.0f;
@@ -69,6 +69,16 @@ public class playersControler : MonoBehaviour
         }
 
         if (taNaAgua)
+        {
+            var posicao_inicial = new Vector3(-20.117f, -1.264f, 0);
+            _body.transform.position = posicao_inicial;
+            Debug.Log("Morreu");
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Inimigo"))
         {
             var posicao_inicial = new Vector3(-20.117f, -1.264f, 0);
             _body.transform.position = posicao_inicial;

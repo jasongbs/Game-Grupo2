@@ -8,8 +8,15 @@ public class pecaQuadrada : MonoBehaviour
     [SerializeField] Vector2 DestPos;
     private Vector2 FinalPos;
     private int way = 1;//0 - Desce e 1- Sobe
-    
-    
+    public int direcao = 0;//0 - Desce e 1- Sobe
+
+    void Start()
+    {
+        if (direcao == 1)
+            way = 1;
+        else
+            way = 0;
+    }
 
     void Update()
     {
