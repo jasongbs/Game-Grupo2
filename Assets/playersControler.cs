@@ -4,36 +4,33 @@ using UnityEngine;
 
 public class playersControler : MonoBehaviour
 {
-    public float speedForce = 15.0f;
-    public float jumpForce = 8.0f;
-
-    public Vector3 offset = Vector2.zero;
-    public float raidios = 10.0f;
-    public Vector2 bonecoPos;
-
-    private Vector2 _input = Vector2.zero;
-    private Vector2 _direction = Vector2.zero;
-    public Vector2 _moviment = Vector2.zero;
-    private Rigidbody2D _body = null;
-    private SpriteRenderer _renderer = null;
-    [SerializeField]
-    private bool isDeath = false;
+    public float    speedForce = 15.0f;
+    public float    jumpForce = 8.0f;
+    public Vector3  offset = Vector2.zero;
+    public float    raidios = 10.0f;
+    public Vector2  bonecoPos;
+    public Vector2  _moviment = Vector2.zero;
     public Animator animator;
-    public bool taNoChao = true;
-    public bool taNaAgua;
+    public bool     taNoChao = true;
+    public bool     taNaAgua;
     public Transform detectaChao;
     public Transform detectaAgua;
     public LayerMask oQueEhChao;
     public LayerMask oQueEhAgua;
-
     public Rigidbody2D rb;
-    public int movespeed;
-    private float direction;
-    private Vector3 facingRight;
-    private Vector3 facingLeft;
+    public int      movespeed;
+    public int      pulosExtras = 1;
 
-    public int pulosExtras = 1;
+    private Vector2     _input = Vector2.zero;
+    private Vector2     _direction = Vector2.zero;
+    private Rigidbody2D _body = null;
+    private SpriteRenderer _renderer = null;
+    private float       direction;
+    private Vector3     facingRight;
+    private Vector3     facingLeft;
 
+    [SerializeField]
+    private bool isDeath = false;
 
     // Awake is called when the script instance is being loaded
     private void Awake()
@@ -41,11 +38,10 @@ public class playersControler : MonoBehaviour
         _body = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
     }
-    //
+ 
     // Start is called before the first frame update
     void Start()
     {
-        //_body = GetComponent<Rigidbody2D>();
         facingRight = transform.localScale;
         facingLeft = transform.localScale;
         facingLeft.x = facingLeft.x * -1;
@@ -98,8 +94,6 @@ public class playersControler : MonoBehaviour
 
             if (taNaAgua)
             {
-                //var posicao_inicial = new Vector3(-20.117f, -1.264f, 0);
-                //rb.transform.position = posicao_inicial;
                 Debug.Log("Morreu");
                 StartCoroutine(Death());
             }
@@ -163,6 +157,7 @@ public class playersControler : MonoBehaviour
             //_body.transform.position = posicao_inicial;
             Debug.Log("Morreu");
             StartCoroutine(Death());
+            //StartCoroutine(takeDamageEffect());
         }
     }
 
@@ -174,7 +169,28 @@ public class playersControler : MonoBehaviour
         Application.LoadLevel(Application.loadedLevel);
     }
 
-    private void FixedUpdate()
+    //public float effectTime = 0.3f;
+    //IEnumerator takeDamageEffect()
+    //{
+    //    float deltaTime = 0;
+    //    whilhe(deltaTime <= effectTime)
+    //    {
+    //        deltaTime += Time.deltaTime;
+    //        _renderer.color = Color.lerp(Color.white, Color.black, deltaTime / effectTime);
+    //        yield return null;
+    //    }
+
+    //    yield return new WaitForSeconds(0.1f);
+    //    deltaTime = 0;
+	   // whilhe(deltaTime <= effectTime)
+    //    {
+    //        deltaTime += Time.deltaTime;
+    //        _renderer.color = Color.lerp(Color.black, Color.white, deltaTime / effectTime);
+    //        yield return null;
+    //    }
+    //}
+
+private void FixedUpdate()
     {
         taNoChao = Physics2D.OverlapCircle(this.transform.position + offset, raidios, oQueEhChao);
 
@@ -191,19 +207,4 @@ public class playersControler : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere((this.transform.position + offset), raidios);
     }
-
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        AiController aiController = collision.gameObject.GetComponent<AiController>();
-
-        if (aiController)
-        {
-            currentHitPoint -= aiController.damage;
-            Vector2 direction = collision.gameObject.transform.position.normalized;
-            direction.y = 0f;
-            m_body2d.velocity = Vector2.zero;
-            m_body2d.AddForce(direction * 150, ForceMode2D.Impulse);
-        }
-    }*/
 }
