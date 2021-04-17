@@ -16,7 +16,9 @@ public class playersControler : MonoBehaviour
     public Vector2 _moviment = Vector2.zero;
     private Rigidbody2D _body = null;
     private SpriteRenderer _renderer = null;
-
+    [SerializeField]
+    private bool isDeath = false;
+    public Animator animator;
     public bool taNoChao = true;
     public bool taNaAgua;
     public Transform detectaChao;
@@ -24,8 +26,14 @@ public class playersControler : MonoBehaviour
     public LayerMask oQueEhChao;
     public LayerMask oQueEhAgua;
 
+    public Rigidbody2D rb;
+    public int movespeed;
+    private float direction;
+    private Vector3 facingRight;
+    private Vector3 facingLeft;
+
     public int pulosExtras = 1;
-    
+
 
     // Awake is called when the script instance is being loaded
     private void Awake()
@@ -33,46 +41,117 @@ public class playersControler : MonoBehaviour
         _body = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
     }
-
+    //
     // Start is called before the first frame update
     void Start()
     {
-        _body = GetComponent<Rigidbody2D>();
+        //_body = GetComponent<Rigidbody2D>();
+        facingRight = transform.localScale;
+        facingLeft = transform.localScale;
+        facingLeft.x = facingLeft.x * -1;
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        taNoChao = Physics2D.OverlapCircle(detectaChao.position, 0.2f, oQueEhChao);
-        taNaAgua = Physics2D.OverlapCircle(detectaChao.position, 0.2f, oQueEhAgua);
-
-        _moviment = new Vector2(Input.GetAxisRaw("Horizontal") * speedForce, 0.0f);
-
-        if (_moviment.sqrMagnitude > 0.1f)
+        if (!isDeath)
         {
-            _renderer.flipX = !(Input.GetAxis("Horizontal") > 0.0f);
-        }
+            direction = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(direction * movespeed, rb.velocity.y);
+            /*
+            if (direction > 0)
+            {
+                //olhando para a direita
+                transform.localScale = facingRight;
+            }
+            if (direction < 0)
+            {
+                //olhando para a esquerda
+                transform.localScale = facingLeft;
+            }
+            */
+            if (Input.GetButtonDown("Jump") && taNoChao == true)
+            {
+                rb.velocity = Vector2.up * jumpForce;
+                //ativar animação do pulo
+                animator.SetBool("taPulando", true);
+            }
 
-        if (Input.GetButtonDown("Jump") && taNoChao == true)
-        {
-            _body.velocity = Vector2.up * jumpForce;
-        }
+            if (Input.GetButtonDown("Jump") && taNoChao == false && pulosExtras > 0)
+            {
+                rb.velocity = Vector2.up * jumpForce;
+                pulosExtras--;
+                //ativar animação do pulo duplo
+                animator.SetBool("puloDuplo", true);
+            }
+            if (taNoChao && rb.velocity.y == 0)
+            {
+                pulosExtras = 1;
+                animator.SetBool("taPulando", false);
+                animator.SetBool("puloDuplo", false);
+            }
 
-        if (Input.GetButtonDown("Jump") && taNoChao == false && pulosExtras > 0)
-        {
-            _body.velocity = Vector2.up * jumpForce;
-            pulosExtras--;
-        }
-        if (taNoChao)
-        {
-            pulosExtras = 1;
-        }
+            taNoChao = Physics2D.OverlapCircle(detectaChao.position, 0.2f, oQueEhChao);
+            taNaAgua = Physics2D.OverlapCircle(detectaChao.position, 0.2f, oQueEhAgua);
 
-        if (taNaAgua)
-        {
-            var posicao_inicial = new Vector3(-20.117f, -1.264f, 0);
-            _body.transform.position = posicao_inicial;
-            Debug.Log("Morreu");
+            if (taNaAgua)
+            {
+                //var posicao_inicial = new Vector3(-20.117f, -1.264f, 0);
+                //rb.transform.position = posicao_inicial;
+                Debug.Log("Morreu");
+                StartCoroutine(Death());
+            }
+
+            if (Input.GetAxis("Horizontal") != 0)
+            {
+                //esta correndo
+                animator.SetBool("taCorrendo", true);
+            }
+            else
+            {
+                //esta parado
+                animator.SetBool("taCorrendo", false);
+            }
+
+            _moviment = new Vector2(Input.GetAxisRaw("Horizontal") * speedForce, 0.0f);
+
+            if (_moviment.sqrMagnitude > 0.1f)
+            {
+                _renderer.flipX = !(Input.GetAxis("Horizontal") > 0.0f);
+            }
+            //----------------------------------------------------------------------------------------------------
+            /*
+            _moviment = new Vector2(Input.GetAxisRaw("Horizontal") * speedForce, 0.0f);
+
+            if (_moviment.sqrMagnitude > 0.1f)
+            {
+                _renderer.flipX = !(Input.GetAxis("Horizontal") > 0.0f);
+            }
+
+            if (Input.GetButtonDown("Jump") && taNoChao == true)
+            {
+                _body.velocity = Vector2.up * jumpForce;
+            }
+
+            if (Input.GetButtonDown("Jump") && taNoChao == false && pulosExtras > 0)
+            {
+                _body.velocity = Vector2.up * jumpForce;
+                pulosExtras--;
+            }
+            if (taNoChao)
+            {
+                pulosExtras = 1;
+            }
+
+            if (taNaAgua)
+            {
+                var posicao_inicial = new Vector3(-20.117f, -1.264f, 0);
+                _body.transform.position = posicao_inicial;
+                Debug.Log("Morreu");
+            }
+            */
         }
     }
 
@@ -80,12 +159,20 @@ public class playersControler : MonoBehaviour
     {
         if (collider.CompareTag("Inimigo"))
         {
-            var posicao_inicial = new Vector3(-20.117f, -1.264f, 0);
-            _body.transform.position = posicao_inicial;
+            //var posicao_inicial = new Vector3(-20.117f, -1.264f, 0);
+            //_body.transform.position = posicao_inicial;
             Debug.Log("Morreu");
+            StartCoroutine(Death());
         }
     }
 
+    IEnumerator Death()
+    {
+        isDeath = true;
+        _body.velocity = new Vector2(0, 0);
+        yield return new WaitForSeconds(1.0f);
+        Application.LoadLevel(Application.loadedLevel);
+    }
 
     private void FixedUpdate()
     {

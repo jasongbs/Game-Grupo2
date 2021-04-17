@@ -9,7 +9,7 @@ public class camera : MonoBehaviour
     {
         
     }
-
+    //
 
     //fazer um delay na camera. 
     /*private void LateUpdate()
