@@ -26,18 +26,18 @@ public class pecaQuadrada : MonoBehaviour
         InitPos = transform.position;
         float PosY = transform.position.y;
 
-        if ( PosY >= 0.5f)
+        if ( PosY >= -1.3f)
         {
             way = 0;
         }
-        else if (PosY <= -3)
+        else if (PosY <= -3.4f)
         {
             way = 1;
         }
 
         if (way == 1)
         {
-            Debug.Log("Subindo!");
+           // Debug.Log("Subindo!");
             FinalPos = InitPos + DestPos * Time.deltaTime;
         }
         else if(way == 0)
@@ -46,6 +46,6 @@ public class pecaQuadrada : MonoBehaviour
             FinalPos = InitPos - DestPos * Time.deltaTime;
         }
         transform.position = FinalPos;
-        Debug.Log(FinalPos);
+      //  Debug.Log(FinalPos);
     }
 }

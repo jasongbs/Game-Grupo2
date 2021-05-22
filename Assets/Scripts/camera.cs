@@ -23,15 +23,15 @@ public class camera : MonoBehaviour
     {
         float posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x, ref velocity.x, smoothTimeX);
         float posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y + deltaY, ref velocity.y, smoothTimeY);
-        if (player.transform.position.x < -13.22f)
+        if (player.transform.position.x < -5.2d)
         {
-            transform.position = new Vector3(-13.22f, -0.01650012f, transform.position.z);
-        }else if (player.transform.position.x > 37.74f)
+            transform.position = new Vector3(-5.2f, -1.9f, transform.position.z);
+        }else if (player.transform.position.x > 65f)
         {
-            transform.position = new Vector3(37.74f, -0.01650012f, transform.position.z);
+            transform.position = new Vector3(65f, -1.9f, transform.position.z);
         }else 
         {
-            transform.position = new Vector3(posX, -0.01650012f, transform.position.z);
+            transform.position = new Vector3(posX, -1.9f, transform.position.z);
         }
 
 
