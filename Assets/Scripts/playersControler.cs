@@ -127,6 +127,13 @@ public class playersControler : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         Application.LoadLevel(Application.loadedLevel);
         
+
+        if (GerenciadorDoJogo.gm.getVidas()>=0)
+        {
+            GerenciadorDoJogo.gm.setVidas(-1);
+        }
+
+        
     }
 
     //logica para animação de morte

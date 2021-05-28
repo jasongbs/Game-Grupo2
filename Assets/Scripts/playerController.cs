@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class playerController : MonoBehaviour
     private Vector3 facingRight;
     private Vector3 facingLeft;
     private int pisca;
+    public Transform FimDeJogo;
+    private int vidas = 3;
 
     [SerializeField]
     private bool isDeath = false;
@@ -42,7 +45,7 @@ public class playerController : MonoBehaviour
     private void Awake()
     {
         pontuacaoText.text = moedas.ToString() + " / " + totalmoedas.ToString();
-
+        FimDeJogo.gameObject.SetActive(false);
         _body = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
     }
@@ -143,7 +146,22 @@ public class playerController : MonoBehaviour
         isDeath = true;
         _body.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(1.0f);
-        Application.LoadLevel(Application.loadedLevel);
+
+
+
+        if (GerenciadorDoJogo.gm.getVidas() <= 1)
+        {
+            Debug.Log("Zero Vidas");
+            FimDeJogo.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Perdendo Vidas");
+            GerenciadorDoJogo.gm.setVidas(-1);
+            Debug.Log("Vidas: " + GerenciadorDoJogo.gm.getVidas());
+
+            Application.LoadLevel(Application.loadedLevel);
+        }
 
     }
 
