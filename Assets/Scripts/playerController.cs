@@ -29,11 +29,10 @@ public class playerController : MonoBehaviour
 
     private Vector2 _input = Vector2.zero;
     private Vector2 _direction = Vector2.zero;
-    private Rigidbody2D _body = null;
     private SpriteRenderer _renderer = null;
     private float direction;
-    private Vector3 facingRight;
-    private Vector3 facingLeft;
+    //private Vector3 facingRight;
+    //private Vector3 facingLeft;
     private int pisca;
     public Transform FimDeJogo;
     private int vidas = 3;
@@ -46,23 +45,17 @@ public class playerController : MonoBehaviour
     {
         pontuacaoText.text = moedas.ToString() + " / " + totalmoedas.ToString();
         FimDeJogo.gameObject.SetActive(false);
-        _body = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
-
-        facingRight = transform.localScale;
-        facingLeft = transform.localScale;
-        facingLeft.x = facingLeft.x * -1;
-        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (!isDeath)
@@ -96,19 +89,16 @@ public class playerController : MonoBehaviour
 
             if (taNaAgua)
             {
-                //Debug.Log("Morreu");
                 StartCoroutine(Death());
                 StartCoroutine(takeDamageEffect());
             }
 
             if (Input.GetAxis("Horizontal") != 0)
             {
-                //esta correndo
                 animator.SetBool("taCorrendo", true);
             }
             else
             {
-                //esta parado
                 animator.SetBool("taCorrendo", false);
             }
 
@@ -144,9 +134,8 @@ public class playerController : MonoBehaviour
     IEnumerator Death()
     {
         isDeath = true;
-        _body.velocity = new Vector2(0, 0);
+        rb.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(1.0f);
-
 
 
         if (GerenciadorDoJogo.gm.getVidas() <= 1)
@@ -159,9 +148,16 @@ public class playerController : MonoBehaviour
             Debug.Log("Perdendo Vidas");
             GerenciadorDoJogo.gm.setVidas(-1);
             Debug.Log("Vidas: " + GerenciadorDoJogo.gm.getVidas());
-
-            Application.LoadLevel(Application.loadedLevel);
+            GerenciadorDoJogo.gm.iniciaPartida();
         }
+
+
+        if (GerenciadorDoJogo.gm.getVidas() >= 0)
+        {
+            GerenciadorDoJogo.gm.setVidas(-1);
+        }
+
+       
 
     }
 
@@ -199,7 +195,7 @@ public class playerController : MonoBehaviour
 
         if (_moviment.sqrMagnitude > 0.1f)
         {
-            _body.AddForce(_moviment, ForceMode2D.Force);
+            rb.AddForce(_moviment, ForceMode2D.Force);
             //Debug.Log("Aplicou força");
         }
     }

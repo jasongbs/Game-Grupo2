@@ -18,17 +18,12 @@ public class playersControler : MonoBehaviour
     public LayerMask oQueEhChao;
     public LayerMask oQueEhAgua;
     public Rigidbody2D rb;
-    public int movespeed;
     public int pulosExtras = 1;
     public int pisca2;
 
-    private Vector2 _input = Vector2.zero;
-    private Vector2 _direction = Vector2.zero;
-    private Rigidbody2D _body = null;
+    //private Rigidbody2D _body = null;
     private SpriteRenderer _renderer = null;
     private float direction;
-    private Vector3 facingRight;
-    private Vector3 facingLeft;
     private int pisca;
 
     [SerializeField]
@@ -37,19 +32,16 @@ public class playersControler : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        _body = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        facingRight = transform.localScale;
-        facingLeft = transform.localScale;
-        facingLeft.x = facingLeft.x * -1;
-        rb = GetComponent<Rigidbody2D>();
+        
         animator = GetComponent<Animator>();
-    }
+    }   
 
     // Update is called once per frame
     void Update()
@@ -57,7 +49,7 @@ public class playersControler : MonoBehaviour
         if (!isDeath)
         {
             direction = Input.GetAxis("Horizontal");
-            rb.velocity = new Vector2(direction * movespeed, rb.velocity.y);
+            rb.velocity = new Vector2(direction * speedForce, rb.velocity.y);
 
             if (Input.GetButtonDown("Jump") && taNoChao == true)
             {
@@ -70,7 +62,7 @@ public class playersControler : MonoBehaviour
             {
                 rb.velocity = Vector2.up * jumpForce;
                 pulosExtras--;
-                //ativar animação do pulo duplo
+           
                 animator.SetBool("puloDuplo", true);
             }
             if (taNoChao && rb.velocity.y == 0)
@@ -123,17 +115,16 @@ public class playersControler : MonoBehaviour
     IEnumerator Death()
     {
         isDeath = true;
-        _body.velocity = new Vector2(0, 0);
+        rb.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(1.0f);
-        Application.LoadLevel(Application.loadedLevel);
-        
+       
 
         if (GerenciadorDoJogo.gm.getVidas()>=0)
         {
             GerenciadorDoJogo.gm.setVidas(-1);
         }
 
-        
+        GerenciadorDoJogo.gm.iniciaPartida();
     }
 
     //logica para animação de morte
@@ -170,7 +161,7 @@ public class playersControler : MonoBehaviour
 
         if (_moviment.sqrMagnitude > 0.1f)
         {
-            _body.AddForce(_moviment, ForceMode2D.Force);
+           // _body.AddForce(_moviment, ForceMode2D.Force);
             Debug.Log("Aplicou força");
         }
     }
