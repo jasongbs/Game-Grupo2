@@ -23,32 +23,12 @@ public class camera : MonoBehaviour
     {
         float posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x, ref velocity.x, smoothTimeX);
         float posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y + deltaY, ref velocity.y, smoothTimeY);
+     
 
-        if (player.transform.position.x < -5.2d && player.transform.position.y < -1.9f)
-        {
-            transform.position = new Vector3(-5.2f, -1.9f, transform.position.z);
-        }
-        else if(player.transform.position.x < -5.2d && player.transform.position.y > -1.9f)
-        {
-            transform.position = new Vector3(-5.2f, posY, transform.position.z);
-
-        }
-        else if (player.transform.position.x > 65f && player.transform.position.y < -1.9f)
-        {
-            transform.position = new Vector3(65f, -1.9f, transform.position.z);
-        }
-        else if (player.transform.position.x > 65f && player.transform.position.y > -1.9f)
-        {
-            transform.position = new Vector3(65f, posY, transform.position.z);
-        }
-        else if (player.transform.position.y < -1.9f)
-        {
-            transform.position = new Vector3(posX, -1.9f, transform.position.z);
-        }
-        else if(player.transform.position.y > -1.9f)
-        {
-            transform.position = new Vector3(posX, posY, transform.position.z);
-        }
+        float yPos = Mathf.Clamp(posY, -1.9f, 40.0f);
+        float xPos = Mathf.Clamp(posX, -1.8f, 65.0f);
+        transform.position = new Vector3(xPos, yPos, transform.position.z);
+        
 
 
     }
