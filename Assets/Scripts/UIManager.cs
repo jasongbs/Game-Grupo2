@@ -11,4 +11,11 @@ public class UIManager : MonoBehaviour
         //Application.LoadLevel("PrimaryScene");
         Application.LoadLevel("PrimaryScene");
     }
+
+    public void voltarMenu()
+    {
+        Debug.Log("Criando Scena");
+        Application.LoadLevel("Inicio");
+
+    }
 }

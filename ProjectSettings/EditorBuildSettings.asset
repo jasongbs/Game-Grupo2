@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Inicio - ComoJogar.unity
+    guid: fc27988439deaf84b984e341851bcb97
+  - enabled: 1
+    path: Assets/Scenes/Inicio.unity
+    guid: 938063c0d95d2674fb92f5a76c0491e6
+  - enabled: 1
+    path: Assets/Scenes/PrimaryScene.unity
+    guid: 976f2c48a8da4d04bb2f2de73b4f1b2c
   m_configObjects: {}
