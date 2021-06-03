@@ -37,11 +37,13 @@ public class GerenciadorDoJogo : MonoBehaviour
 
     public void iniciaPartida()
     {
-        
+
         Debug.Log("Criando Scena");
         Application.LoadLevel("PrimaryScene");
 
     }
+
+
 
 
     // Update is called once per frame

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Inimigo
   - Moeda
+  - Bau
   layers:
   - Default
   - TransparentFX

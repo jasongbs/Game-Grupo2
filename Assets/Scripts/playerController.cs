@@ -35,6 +35,10 @@ public class playerController : MonoBehaviour
     //private Vector3 facingLeft;
     private int pisca;
     public Transform FimDeJogo;
+    public Transform VidaUm;
+    public Transform VidaDois;
+    public Transform VidaTres;
+
     private int vidas = 3;
 
     [SerializeField]
@@ -45,13 +49,33 @@ public class playerController : MonoBehaviour
     {
         pontuacaoText.text = moedas.ToString() + " / " + totalmoedas.ToString();
         FimDeJogo.gameObject.SetActive(false);
+
+
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
+
+        if (GerenciadorDoJogo.gm.getVidas() == 2)
+        {
+            VidaUm.gameObject.SetActive(false);
+        }
+        else if (GerenciadorDoJogo.gm.getVidas() == 1)
+        {
+            VidaUm.gameObject.SetActive(false);
+            VidaDois.gameObject.SetActive(false);
+        }
+        else if (GerenciadorDoJogo.gm.getVidas() == 0)
+        {
+            VidaUm.gameObject.SetActive(false);
+            VidaDois.gameObject.SetActive(false);
+            VidaTres.gameObject.SetActive(false);
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+       
+
         animator = GetComponent<Animator>();
     }
 
@@ -127,6 +151,20 @@ public class playerController : MonoBehaviour
             Destroy(collider.gameObject);
             pontuacaoText.text = moedas.ToString() + " / " + totalmoedas.ToString();
         }
+
+        if (collider.CompareTag("Bau"))
+        {
+
+            if (moedas == 10)
+            {
+                animator.SetBool("PodeAbrir", false);
+                Debug.Log("Fim de Jogo");
+            }
+            else
+            Debug.Log("ELSE Fim de Jogo");
+
+
+        }
     }
 
 
@@ -139,6 +177,7 @@ public class playerController : MonoBehaviour
 
         if (GerenciadorDoJogo.gm.getVidas() <= 1)
         {
+            
             Debug.Log("Zero Vidas");
             FimDeJogo.gameObject.SetActive(true);
         }
