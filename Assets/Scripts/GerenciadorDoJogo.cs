@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 public class GerenciadorDoJogo : MonoBehaviour
 {
 
     public static GerenciadorDoJogo gm;
 
-    private int vidas=3;
-    
+    public int vidas=3;
+
     void Awake()
     {
         if(gm == null)
@@ -16,10 +16,10 @@ public class GerenciadorDoJogo : MonoBehaviour
             gm = this;
             DontDestroyOnLoad(gameObject);
         }
-       /* else
+        else
         {
             Destroy(gameObject);
-        }*/ 
+        }
     }
 
     public int getVidas()
@@ -29,6 +29,7 @@ public class GerenciadorDoJogo : MonoBehaviour
 
     public void setVidas(int vida)
     {
+       
         Debug.Log("Removendo Vidas");
         vidas += vida;
         
@@ -36,21 +37,17 @@ public class GerenciadorDoJogo : MonoBehaviour
 
     public void iniciaPartida()
     {
+        
         Debug.Log("Criando Scena");
-        SceneManager.LoadScene("PrimaryScene");
+        Application.LoadLevel("PrimaryScene");
 
     }
 
-    public void ReinciaPartida()
-    {
-        setVidas(3);
-        SceneManager.LoadScene("PrimaryScene");
-
-    }
 
     // Update is called once per frame
     void Update()
     {
         
     }
+  
 }

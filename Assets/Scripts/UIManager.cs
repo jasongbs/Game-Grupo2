@@ -6,7 +6,8 @@ public class UIManager : MonoBehaviour
 {
     public void ReinciaPartida()
     {
-        
+
+        GerenciadorDoJogo.gm.setVidas(3);
         Application.LoadLevel("PrimaryScene");
 
     }

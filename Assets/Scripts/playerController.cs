@@ -127,7 +127,6 @@ public class playerController : MonoBehaviour
             Destroy(collider.gameObject);
             pontuacaoText.text = moedas.ToString() + " / " + totalmoedas.ToString();
         }
-
     }
 
 
@@ -151,11 +150,6 @@ public class playerController : MonoBehaviour
             GerenciadorDoJogo.gm.iniciaPartida();
         }
 
-
-        if (GerenciadorDoJogo.gm.getVidas() >= 0)
-        {
-            GerenciadorDoJogo.gm.setVidas(-1);
-        }
 
        
 

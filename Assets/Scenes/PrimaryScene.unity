@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415d14a93bf25d4092a2c5a0e8fcadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vidas: 3
 --- !u!4 &2782737
 Transform:
   m_ObjectHideFlags: 0
@@ -2002,13 +2003,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949384826}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1537021576}
-  m_Father: {fileID: 1275744374}
-  m_RootOrder: 0
+  m_Father: {fileID: 2041261268}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2070,7 +2071,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &949384829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2549,8 +2550,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 949384827}
+  m_Children: []
   m_Father: {fileID: 2041261268}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3393,7 +3393,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Reiniciar
 --- !u!222 &1537021578
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5756,6 +5756,7 @@ RectTransform:
   m_Children:
   - {fileID: 1275744374}
   - {fileID: 472698787}
+  - {fileID: 949384827}
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
