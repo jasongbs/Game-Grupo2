@@ -26,7 +26,7 @@ public class camera : MonoBehaviour
      
 
         float yPos = Mathf.Clamp(posY, -1.9f, 40.0f);
-        float xPos = Mathf.Clamp(posX, -1.8f, 65.0f);
+        float xPos = Mathf.Clamp(posX, -5.0f, 68.0f);
         transform.position = new Vector3(xPos, yPos, transform.position.z);
         
 

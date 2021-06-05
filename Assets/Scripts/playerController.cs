@@ -74,9 +74,7 @@ public class playerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
-
-        animator = GetComponent<Animator>();
+        animator = GetComponent <Animator>();
     }
 
 
@@ -101,7 +99,7 @@ public class playerController : MonoBehaviour
                 //ativar animação do pulo duplo
                 animator.SetBool("puloDuplo", true);
             }
-            if (taNoChao && rb.velocity.y >=-1 && rb.velocity.y <= 1)
+            if (taNoChao)
             {
                 pulosExtras = 1;
                 animator.SetBool("taPulando", false);
@@ -154,15 +152,18 @@ public class playerController : MonoBehaviour
 
         if (collider.CompareTag("Bau"))
         {
-
+            Animator animatorDoBau;
+            animatorDoBau = collider.GetComponent<Animator>();
             if (moedas == 10)
             {
-                animator.SetBool("PodeAbrir", false);
+                animatorDoBau.SetBool("PodeAbrir", true);
                 Debug.Log("Fim de Jogo");
             }
             else
-            Debug.Log("ELSE Fim de Jogo");
-
+            {
+                
+                Debug.Log("Else...");
+            }
 
         }
     }
