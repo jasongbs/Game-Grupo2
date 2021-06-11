@@ -465,10 +465,10 @@ RectTransform:
   m_Father: {fileID: 1756714507}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20, y: -10.08}
-  m_SizeDelta: {x: 538.7635, y: 305.841}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -8.8594055, y: 7.3285065}
+  m_SizeDelta: {x: -162.3645, y: -105.34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1022362327
 MonoBehaviour:
@@ -541,7 +541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -71, y: 40}
+  m_AnchoredPosition: {x: -65, y: 33}
   m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0.50000006, y: 0.4999999}
 --- !u!114 &1379222082
@@ -588,8 +588,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1756714508}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+      - m_Target: {fileID: 1756714509}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: voltarMenu
         m_Mode: 1
         m_Arguments:
@@ -651,6 +651,7 @@ GameObject:
   - component: {fileID: 1756714505}
   - component: {fileID: 1756714504}
   - component: {fileID: 1756714508}
+  - component: {fileID: 1756714509}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -750,5 +751,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 868544f409d2dcd45a3bb019506be067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1756714509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756714503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df84248961c56a9418cd4226ece379f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
