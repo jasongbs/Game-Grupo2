@@ -18,4 +18,16 @@ public class UIManager : MonoBehaviour
         Application.LoadLevel("Inicio");
 
     }
+
+
+    public void mostraComoJogar()
+    {
+
+        Debug.Log("Criando Scena");
+        Application.LoadLevel("Inicio - ComoJogar");
+
+    }
+
+    
+
 }

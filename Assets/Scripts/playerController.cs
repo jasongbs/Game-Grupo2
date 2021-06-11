@@ -156,8 +156,11 @@ public class playerController : MonoBehaviour
             animatorDoBau = collider.GetComponent<Animator>();
             if (moedas == 10)
             {
-                animatorDoBau.SetBool("PodeAbrir", true);
+                
+               animatorDoBau.SetBool("PodeAbrir", true);
+                StartCoroutine(Finish());
                 Debug.Log("Fim de Jogo");
+                
             }
             else
             {
@@ -167,7 +170,11 @@ public class playerController : MonoBehaviour
 
         }
     }
-
+    IEnumerator Finish()
+    {
+        yield return new WaitForSeconds(1.0f);
+        GerenciadorDoJogo.gm.partidaConcluida();
+    }
 
     IEnumerator Death()
     {

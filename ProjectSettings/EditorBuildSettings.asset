@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PrimaryScene.unity
     guid: 976f2c48a8da4d04bb2f2de73b4f1b2c
+  - enabled: 1
+    path: Assets/Scenes/Final de Fase.unity
+    guid: d93c188c3f5fc874a912f7bd53947f48
   m_configObjects: {}

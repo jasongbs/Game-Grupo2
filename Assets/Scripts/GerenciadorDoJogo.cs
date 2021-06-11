@@ -7,7 +7,7 @@ public class GerenciadorDoJogo : MonoBehaviour
 
     public static GerenciadorDoJogo gm;
 
-    public int vidas=3;
+    public int vidas=0;
 
     void Awake()
     {
@@ -37,13 +37,16 @@ public class GerenciadorDoJogo : MonoBehaviour
 
     public void iniciaPartida()
     {
-
         Debug.Log("Criando Scena");
         Application.LoadLevel("PrimaryScene");
-
     }
 
 
+    public void partidaConcluida()
+    {
+        Debug.Log("Criando Scena");
+        Application.LoadLevel("Final de Fase");
+    }
 
 
     // Update is called once per frame
