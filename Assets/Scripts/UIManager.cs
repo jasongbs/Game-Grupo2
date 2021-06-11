@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
     {
 
         GerenciadorDoJogo.gm.setVidas(3);
-        //Application.LoadLevel("PrimaryScene");
         Application.LoadLevel("PrimaryScene");
     }
 
@@ -16,13 +15,11 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Criando Scena");
         Application.LoadLevel("Inicio");
-
     }
 
 
     public void mostraComoJogar()
     {
-
         Debug.Log("Criando Scena");
         Application.LoadLevel("Inicio - ComoJogar");
 

@@ -37,7 +37,6 @@ public class pecaQuadrada : MonoBehaviour
 
         if (way == 1)
         {
-           // Debug.Log("Subindo!");
             FinalPos = InitPos + DestPos * Time.deltaTime;
         }
         else if(way == 0)
@@ -46,6 +45,5 @@ public class pecaQuadrada : MonoBehaviour
             FinalPos = InitPos - DestPos * Time.deltaTime;
         }
         transform.position = FinalPos;
-      //  Debug.Log(FinalPos);
     }
 }

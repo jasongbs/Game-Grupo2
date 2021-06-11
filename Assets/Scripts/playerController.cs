@@ -20,10 +20,12 @@ public class playerController : MonoBehaviour
     public LayerMask oQueEhChao;
     public LayerMask oQueEhAgua;
     public Rigidbody2D rb;
-   
+    public Transform FimDeJogo;
+    public Transform VidaUm;
+    public Transform VidaDois;
+    public Transform VidaTres;
     public int pulosExtras = 1;
     public int pisca2;
-    private int moedas=0;
     public int totalmoedas= 1;
     public Text pontuacaoText;
 
@@ -31,26 +33,17 @@ public class playerController : MonoBehaviour
     private Vector2 _direction = Vector2.zero;
     private SpriteRenderer _renderer = null;
     private float direction;
-    //private Vector3 facingRight;
-    //private Vector3 facingLeft;
     private int pisca;
-    public Transform FimDeJogo;
-    public Transform VidaUm;
-    public Transform VidaDois;
-    public Transform VidaTres;
-
-    private int vidas = 3;
+    private int moedas = 0;
 
     [SerializeField]
     private bool isDeath = false;
 
-    // Awake is called when the script instance is being loaded
+
     private void Awake()
     {
         pontuacaoText.text = moedas.ToString() + " / " + totalmoedas.ToString();
         FimDeJogo.gameObject.SetActive(false);
-
-
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
 
@@ -71,12 +64,10 @@ public class playerController : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent <Animator>();
     }
-
 
     void Update()
     {
@@ -137,14 +128,12 @@ public class playerController : MonoBehaviour
     {
         if (collider.CompareTag("Inimigo"))
         {
-            Debug.Log("Morreu");
             StartCoroutine(Death());
             StartCoroutine(takeDamageEffect());
         }
 
         if (collider.CompareTag("Moeda"))
         {
-            Debug.Log("Coletando Moeda");
             moedas = moedas + 1;
             Destroy(collider.gameObject);
             pontuacaoText.text = moedas.ToString() + " / " + totalmoedas.ToString();
@@ -156,18 +145,9 @@ public class playerController : MonoBehaviour
             animatorDoBau = collider.GetComponent<Animator>();
             if (moedas == 10)
             {
-                
                animatorDoBau.SetBool("PodeAbrir", true);
                 StartCoroutine(Finish());
-                Debug.Log("Fim de Jogo");
-                
-            }
-            else
-            {
-                
-                Debug.Log("Else...");
-            }
-
+            }        
         }
     }
     IEnumerator Finish()
@@ -182,23 +162,15 @@ public class playerController : MonoBehaviour
         rb.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(1.0f);
 
-
         if (GerenciadorDoJogo.gm.getVidas() <= 1)
         {
-            
-            Debug.Log("Zero Vidas");
             FimDeJogo.gameObject.SetActive(true);
         }
         else
         {
-            Debug.Log("Perdendo Vidas");
             GerenciadorDoJogo.gm.setVidas(-1);
-            Debug.Log("Vidas: " + GerenciadorDoJogo.gm.getVidas());
             GerenciadorDoJogo.gm.iniciaPartida();
         }
-
-
-       
 
     }
 
@@ -233,11 +205,9 @@ public class playerController : MonoBehaviour
     private void FixedUpdate()
     {
         taNoChao = Physics2D.OverlapCircle(this.transform.position + offset, raidios, oQueEhChao);
-
         if (_moviment.sqrMagnitude > 0.1f)
         {
             rb.AddForce(_moviment, ForceMode2D.Force);
-            //Debug.Log("Aplicou força");
         }
     }
 

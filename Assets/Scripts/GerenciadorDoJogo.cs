@@ -29,30 +29,17 @@ public class GerenciadorDoJogo : MonoBehaviour
 
     public void setVidas(int vida)
     {
-       
-        Debug.Log("Removendo Vidas");
-        vidas += vida;
-        
+      vidas += vida; 
     }
 
     public void iniciaPartida()
     {
-        Debug.Log("Criando Scena");
         Application.LoadLevel("PrimaryScene");
     }
 
-
     public void partidaConcluida()
     {
-        Debug.Log("Criando Scena");
         Application.LoadLevel("Final de Fase");
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
   
 }
